@@ -6,11 +6,11 @@ using TodoApi.Models;
 
 namespace TodoApiDTO.Data
 {
-    public class SqlTodoItemServiceRepo : ITodoItemServiceRepo
+    public class SqlTodoItemRepo : ITodoItemRepo
     {
         private readonly DataContext _context;
 
-        public SqlTodoItemServiceRepo(DataContext context)
+        public SqlTodoItemRepo(DataContext context)
         {
             _context = context;
         }

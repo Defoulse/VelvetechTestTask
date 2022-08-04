@@ -1,8 +1,10 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TodoApi.Dtos;
 using TodoApi.Models;
 using TodoApiDTO.Data;
 
@@ -12,25 +14,31 @@ namespace TodoApi.Controllers
     [ApiController]
     public class TodoItemsController : ControllerBase
     {
-        private readonly ITodoItemServiceRepo _repository;
+        private readonly ITodoItemRepo _repository;
+        private readonly IMapper _mapper;
 
-        public TodoItemsController(ITodoItemServiceRepo repository)
+        public TodoItemsController(ITodoItemRepo repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<TodoItem>> GetTodoItems()
+        public ActionResult<IEnumerable<TodoItemReadDto>> GetTodoItems()
         {
             var todoItems = _repository.GetTodoItems();
-            return Ok(todoItems);
+            return Ok(_mapper.Map<IEnumerable<TodoItemReadDto>>(todoItems));
         }
 
         [HttpGet("{id}")]
-        public ActionResult<TodoItem> GetTodoItem(long id)
+        public ActionResult<TodoItemReadDto> GetTodoItem(long id)
         {
             var todoItem = _repository.GetTodoItem(id);
-            return Ok(todoItem);
+            if (todoItem != null)
+            {
+                return Ok(_mapper.Map<TodoItemReadDto>(todoItem));
+            }
+            return NotFound();
         }
     }
 }

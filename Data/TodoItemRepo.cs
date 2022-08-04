@@ -6,7 +6,7 @@ using TodoApi.Models;
 
 namespace TodoApiDTO.Data
 {
-    public class TodoItemServiceRepo : ITodoItemServiceRepo
+    public class TodoItemRepo : ITodoItemRepo
     {
         public IEnumerable<TodoItem> GetTodoItems()
         {

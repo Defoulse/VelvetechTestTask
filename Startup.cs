@@ -34,7 +34,9 @@ namespace TodoApi
             services.AddControllers();
             services.AddSwaggerGen();
 
-            services.AddScoped<ITodoItemServiceRepo, SqlTodoItemServiceRepo>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddScoped<ITodoItemRepo, SqlTodoItemRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
