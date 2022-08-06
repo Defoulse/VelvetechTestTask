@@ -24,16 +24,16 @@ namespace TodoApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<TodoItemReadDto>> GetTodoItems()
+        public async Task<ActionResult<IEnumerable<TodoItemReadDto>>> GetTodoItemsAsync()
         {
-            var todoItems = _repository.GetTodoItems();
+            var todoItems = await _repository.GetTodoItemsAsync();
             return Ok(_mapper.Map<IEnumerable<TodoItemReadDto>>(todoItems));
         }
 
-        [HttpGet("{id}", Name = "GetTodoItem")]
-        public ActionResult<TodoItemReadDto> GetTodoItem(long id)
+        [HttpGet("{id}", Name = "GetTodoItemAsync")]
+        public async Task<ActionResult<TodoItemReadDto>> GetTodoItemAsync(long id)
         {
-            var todoItem = _repository.GetTodoItem(id);
+            var todoItem = await _repository.GetTodoItemAsync(id);
             if (todoItem != null)
             {
                 return Ok(_mapper.Map<TodoItemReadDto>(todoItem));
@@ -42,37 +42,37 @@ namespace TodoApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult<TodoItemReadDto> CreateTodoItem(TodoItemCreateDto todoItemCreateDto)
+        public async Task<ActionResult<TodoItemReadDto>> CreateTodoItemAsync(TodoItemCreateDto todoItemCreateDto)
         {
             var todoItemModel = _mapper.Map<TodoItem>(todoItemCreateDto);
-            _repository.CreateTodoItem(todoItemModel);
-            _repository.SaveChanges();
+            await _repository.CreateTodoItemAsync(todoItemModel);
+            await _repository.SaveChangesAsync();
 
             var todoItemReadDto = _mapper.Map<TodoItemReadDto>(todoItemModel);
 
-            return CreatedAtRoute(nameof(GetTodoItem), new {Id = todoItemReadDto.Id}, todoItemReadDto);
+            return CreatedAtRoute(nameof(GetTodoItemAsync), new {Id = todoItemReadDto.Id}, todoItemReadDto);
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateTodoItem(long id, TodoItemUpdateDto todoItemUpdateDto)
+        public async Task<ActionResult> UpdateTodoItemAsync(long id, TodoItemUpdateDto todoItemUpdateDto)
         {
-            var todoItemModel = _repository.GetTodoItem(id);
+            var todoItemModel = await _repository.GetTodoItemAsync(id);
             if (todoItemModel == null)
             {
                 return NotFound();
             }
             _mapper.Map(todoItemUpdateDto, todoItemModel);
 
-            _repository.UpdateTodoItem(todoItemModel);
-            _repository.SaveChanges();
+            await _repository.UpdateTodoItemAsync(todoItemModel);
+            await _repository.SaveChangesAsync();
 
             return NoContent();
         }
 
         [HttpPatch("{id}")]
-        public ActionResult PartialUpdateTodoItem(int id, JsonPatchDocument<TodoItemUpdateDto> patchDoc)
+        public async Task<ActionResult> PartialUpdateTodoItem(int id, JsonPatchDocument<TodoItemUpdateDto> patchDoc)
         {
-            var todoItemModel = _repository.GetTodoItem(id);
+            var todoItemModel = await _repository.GetTodoItemAsync(id);
             if (todoItemModel == null)
             {
                 return NotFound();
@@ -86,22 +86,22 @@ namespace TodoApi.Controllers
             }
 
             _mapper.Map(todoItemToPatch, todoItemModel);
-            _repository.UpdateTodoItem(todoItemModel);
-            _repository.SaveChanges();
+            await _repository.UpdateTodoItemAsync(todoItemModel);
+            await _repository.SaveChangesAsync();
 
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public ActionResult DeleteTodoItem(long id)
+        public async Task<ActionResult> DeleteTodoItem(long id)
         {
-            var todoItemModel = _repository.GetTodoItem(id);
+            var todoItemModel = await _repository.GetTodoItemAsync(id);
             if (todoItemModel == null)
             {
                 return NotFound();
             }
-            _repository.DeleteTodoItem(todoItemModel);
-            _repository.SaveChanges();
+            await _repository.DeleteTodoItemAsync(todoItemModel);
+            await _repository.SaveChangesAsync();
 
             return NoContent();
         }

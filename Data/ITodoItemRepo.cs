@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TodoApiDTO.Dtos;
 
 namespace TodoApiDTO.Data
 {
     public interface ITodoItemRepo
     {
-        bool SaveChanges();
+        Task<bool> SaveChangesAsync();
 
-        IEnumerable<TodoItem> GetTodoItems();
-        TodoItem GetTodoItem(long id);
-        void CreateTodoItem(TodoItem todoItem);
-        void UpdateTodoItem(TodoItem todoItem);
-        void DeleteTodoItem(TodoItem todoItem);
+        Task<IEnumerable<TodoItem>> GetTodoItemsAsync();
+        Task<TodoItem> GetTodoItemAsync(long id);
+        Task CreateTodoItemAsync(TodoItem todoItem);
+        Task UpdateTodoItemAsync(TodoItem todoItem);
+        Task DeleteTodoItemAsync(TodoItem todoItem);
     }
 }

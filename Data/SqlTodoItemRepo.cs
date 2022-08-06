@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TodoApiDTO.Dtos;
 
 namespace TodoApiDTO.Data
@@ -14,42 +16,43 @@ namespace TodoApiDTO.Data
             _context = context;
         }
 
-        public IEnumerable<TodoItem> GetTodoItems()
+        public async Task<IEnumerable<TodoItem>> GetTodoItemsAsync()
         {
-            return _context.TodoItems.ToList();
+            return await _context.TodoItems.ToListAsync();
         }
-        public TodoItem GetTodoItem(long id)
+        public async Task<TodoItem> GetTodoItemAsync(long id)
         {
-            return _context.TodoItems.FirstOrDefault(p => p.Id == id);
+            return await _context.TodoItems.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public void CreateTodoItem(TodoItem todoItem)
+        public async Task CreateTodoItemAsync(TodoItem todoItem)
         {
             if ( todoItem == null)
             {
                 throw new ArgumentNullException(nameof(todoItem));
             }
 
-            _context.TodoItems.Add(todoItem);
+            await _context.TodoItems.AddAsync(todoItem);
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-           return  (_context.SaveChanges() >= 0);
+           return (await _context.SaveChangesAsync() >= 0);
         }
 
-        public void UpdateTodoItem(TodoItem todoItem)
+        public async Task UpdateTodoItemAsync(TodoItem todoItem)
         {
-            
+            await Task.CompletedTask;
         }
 
-        public void DeleteTodoItem(TodoItem todoItem)
+        public async Task DeleteTodoItemAsync(TodoItem todoItem)
         {
             if (todoItem == null)
             {
                 throw new ArgumentNullException(nameof(todoItem));
             }
             _context.TodoItems.Remove(todoItem);
+            await Task.CompletedTask;
         }
     }
 }
