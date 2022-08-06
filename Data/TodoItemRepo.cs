@@ -63,5 +63,10 @@ namespace TodoApiDTO.Data
         {
             throw new NotImplementedException();
         }
+
+        public void DeleteTodoItem(TodoItem todoItem)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

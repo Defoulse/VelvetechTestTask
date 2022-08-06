@@ -30,7 +30,7 @@ namespace TodoApiDTO.Data
                 throw new ArgumentNullException(nameof(todoItem));
             }
 
-            _context.Add(todoItem);
+            _context.TodoItems.Add(todoItem);
         }
 
         public bool SaveChanges()
@@ -41,6 +41,15 @@ namespace TodoApiDTO.Data
         public void UpdateTodoItem(TodoItem todoItem)
         {
             
+        }
+
+        public void DeleteTodoItem(TodoItem todoItem)
+        {
+            if (todoItem == null)
+            {
+                throw new ArgumentNullException(nameof(todoItem));
+            }
+            _context.TodoItems.Remove(todoItem);
         }
     }
 }

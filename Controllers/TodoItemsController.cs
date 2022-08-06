@@ -91,5 +91,19 @@ namespace TodoApi.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteTodoItem(long id)
+        {
+            var todoItemModel = _repository.GetTodoItem(id);
+            if (todoItemModel == null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteTodoItem(todoItemModel);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }

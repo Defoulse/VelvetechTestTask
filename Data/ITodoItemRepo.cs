@@ -11,5 +11,6 @@ namespace TodoApiDTO.Data
         TodoItem GetTodoItem(long id);
         void CreateTodoItem(TodoItem todoItem);
         void UpdateTodoItem(TodoItem todoItem);
+        void DeleteTodoItem(TodoItem todoItem);
     }
 }
