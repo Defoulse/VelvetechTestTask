@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -62,6 +63,29 @@ namespace TodoApi.Controllers
             }
             _mapper.Map(todoItemUpdateDto, todoItemModel);
 
+            _repository.UpdateTodoItem(todoItemModel);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        [HttpPatch("{id}")]
+        public ActionResult PartialUpdateTodoItem(int id, JsonPatchDocument<TodoItemUpdateDto> patchDoc)
+        {
+            var todoItemModel = _repository.GetTodoItem(id);
+            if (todoItemModel == null)
+            {
+                return NotFound();
+            }
+
+            var todoItemToPatch = _mapper.Map<TodoItemUpdateDto>(todoItemModel);
+            patchDoc.ApplyTo(todoItemToPatch, ModelState);
+            if (!TryValidateModel(todoItemToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(todoItemToPatch, todoItemModel);
             _repository.UpdateTodoItem(todoItemModel);
             _repository.SaveChanges();
 
