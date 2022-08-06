@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TodoApi.Dtos
+namespace TodoApiDTO.Dtos
 {
     public class TodoItemReadDto
     {

@@ -4,9 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TodoApi.Dtos;
-using TodoApi.Models;
 using TodoApiDTO.Data;
+using TodoApiDTO.Dtos;
 
 namespace TodoApi.Controllers
 {
@@ -51,6 +50,22 @@ namespace TodoApi.Controllers
             var todoItemReadDto = _mapper.Map<TodoItemReadDto>(todoItemModel);
 
             return CreatedAtRoute(nameof(GetTodoItem), new {Id = todoItemReadDto.Id}, todoItemReadDto);
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult UpdateTodoItem(long id, TodoItemUpdateDto todoItemUpdateDto)
+        {
+            var todoItemModel = _repository.GetTodoItem(id);
+            if (todoItemModel == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(todoItemUpdateDto, todoItemModel);
+
+            _repository.UpdateTodoItem(todoItemModel);
+            _repository.SaveChanges();
+
+            return NoContent();
         }
     }
 }

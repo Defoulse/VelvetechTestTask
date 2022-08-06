@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TodoApi.Models;
+﻿using System.Collections.Generic;
+using TodoApiDTO.Dtos;
 
 namespace TodoApiDTO.Data
 {
@@ -13,5 +10,6 @@ namespace TodoApiDTO.Data
         IEnumerable<TodoItem> GetTodoItems();
         TodoItem GetTodoItem(long id);
         void CreateTodoItem(TodoItem todoItem);
+        void UpdateTodoItem(TodoItem todoItem);
     }
 }

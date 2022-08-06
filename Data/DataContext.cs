@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TodoApi.Models;
+using TodoApiDTO.Dtos;
 
 namespace TodoApiDTO.Data
 {

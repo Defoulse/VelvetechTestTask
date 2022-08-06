@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TodoApi.Models;
+using TodoApiDTO.Dtos;
 
 namespace TodoApiDTO.Data
 {
@@ -57,6 +55,11 @@ namespace TodoApiDTO.Data
         }
 
         public void CreateTodoItem(TodoItem todoItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateTodoItem(TodoItem todoItem)
         {
             throw new NotImplementedException();
         }

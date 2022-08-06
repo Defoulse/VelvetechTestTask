@@ -1,10 +1,5 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TodoApi.Dtos;
-using TodoApi.Models;
+using TodoApiDTO.Dtos;
 
 namespace TodoApiDTO.Profiles
 {
@@ -14,6 +9,7 @@ namespace TodoApiDTO.Profiles
         {
             CreateMap<TodoItem, TodoItemReadDto>();
             CreateMap<TodoItemCreateDto, TodoItem>();
+            CreateMap<TodoItemUpdateDto, TodoItem>();
         }
     }
 }
