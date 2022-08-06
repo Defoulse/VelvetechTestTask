@@ -23,5 +23,20 @@ namespace TodoApiDTO.Data
         {
             return _context.TodoItems.FirstOrDefault(p => p.Id == id);
         }
+
+        public void CreateTodoItem(TodoItem todoItem)
+        {
+            if ( todoItem == null)
+            {
+                throw new ArgumentNullException(nameof(todoItem));
+            }
+
+            _context.Add(todoItem);
+        }
+
+        public bool SaveChanges()
+        {
+           return  (_context.SaveChanges() >= 0);
+        }
     }
 }

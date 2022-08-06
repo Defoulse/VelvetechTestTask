@@ -8,7 +8,10 @@ namespace TodoApiDTO.Data
 {
     public interface ITodoItemRepo
     {
+        bool SaveChanges();
+
         IEnumerable<TodoItem> GetTodoItems();
         TodoItem GetTodoItem(long id);
+        void CreateTodoItem(TodoItem todoItem);
     }
 }

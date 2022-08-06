@@ -50,5 +50,15 @@ namespace TodoApiDTO.Data
                 IsComplete = false
             };
         }
+
+        public bool SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateTodoItem(TodoItem todoItem)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
