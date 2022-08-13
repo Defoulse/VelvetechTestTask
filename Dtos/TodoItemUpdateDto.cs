@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TodoApiDTO.Dtos
+namespace TodoApiDTO.Models
 {
     public class TodoItemUpdateDto : TodoItemCreateDto
     {

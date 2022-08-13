@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TodoApiDTO.Data;
-using TodoApiDTO.Dtos;
+using TodoApiDTO.Models;
 
 namespace TodoApi.Controllers
 {

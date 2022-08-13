@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using TodoApiDTO.Dtos;
+using TodoApiDTO.Models;
 
 namespace TodoApiDTO.Data
 {

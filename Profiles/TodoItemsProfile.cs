@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using TodoApiDTO.Dtos;
+using TodoApiDTO.Models;
 
 namespace TodoApiDTO.Profiles
 {
